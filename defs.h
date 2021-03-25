@@ -3,36 +3,36 @@
 
 typedef struct
 {
-  char *buffer;
-  size_t buffer_length;
-  ssize_t input_length;
+	char *buffer;
+	size_t buffer_length;
+	ssize_t input_length;
 } InputBuffer;
 
 typedef enum
 {
-  EXECUTE_SUCCESS,
-  EXECUTE_TABLE_FULL
+	EXECUTE_SUCCESS,
+	EXECUTE_TABLE_FULL
 } ExecuteResult;
 
 typedef enum
 {
-  META_COMMAND_SUCCESS,
-  META_COMMAND_UNRECOGNIZED_COMMAND
+	META_COMMAND_SUCCESS,
+	META_COMMAND_UNRECOGNIZED_COMMAND
 } MetaCommandResult;
 
 typedef enum
 {
-  PREPARE_SUCCESS,
-  PREPARE_NEGATIVE_ID,
-  PREPARE_STRING_TOO_LONG,
-  PREPARE_SYNTAX_ERROR,
-  PREPARE_UNRECOGNIZED_STATEMENT
+	PREPARE_SUCCESS,
+	PREPARE_NEGATIVE_ID,
+	PREPARE_STRING_TOO_LONG,
+	PREPARE_SYNTAX_ERROR,
+	PREPARE_UNRECOGNIZED_STATEMENT
 } PrepareResult;
 
 typedef enum
 {
-  STATEMENT_INSERT,
-  STATEMENT_SELECT
+	STATEMENT_INSERT,
+	STATEMENT_SELECT
 } StatementType;
 
 #define COLUMN_USERNAME_SIZE 32
@@ -40,15 +40,15 @@ typedef enum
 
 typedef struct
 {
-  uint32_t id;
-  char username[COLUMN_USERNAME_SIZE + 1];
-  char email[COLUMN_EMAIL_SIZE + 1];
+	uint32_t id;
+	char username[COLUMN_USERNAME_SIZE + 1];
+	char email[COLUMN_EMAIL_SIZE + 1];
 } Row;
 
 typedef struct
 {
-  StatementType type;
-  Row row_to_insert;
+	StatementType type;
+	Row row_to_insert;
 } Statement;
 
 #define size_of_attribute(Struct, Attribute) sizeof(((Struct *)0)->Attribute)
@@ -68,15 +68,15 @@ const uint32_t TABLE_MAX_ROWS = ROWS_PER_PAGE * TABLE_MAX_PAGES;
 
 typedef struct
 {
-  int file_descriptor;
-  uint32_t file_length;
-  void *pages[TABLE_MAX_PAGES];
+	int file_descriptor;
+	uint32_t file_length;
+	void *pages[TABLE_MAX_PAGES];
 } Pager;
 
 typedef struct
 {
-  uint32_t num_rows;
-  Pager *pager;
+	uint32_t num_rows;
+	Pager *pager;
 } Table;
 
 #endif
